@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "235494eb-98d0-47dc-abfc-c2251c72a355",
+		"name": "Family App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23711119"
+	},
+	"item": [
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Profile List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/profiles",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"superior\": \"hello\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/profiles",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/profiles/123",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"profiles",
+								"123"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
