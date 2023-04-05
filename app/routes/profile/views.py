@@ -1,8 +1,10 @@
 from http import HTTPStatus
 
+from app import db
 from flask import request
 from flask_restful import Resource
-from app.models.profile import Profile
+from app.models.profile import Profile, ProfileSchema
+from app.models.badge import BadgeSchema
 
 
 class ProfilesApi(Resource):
@@ -11,7 +13,15 @@ class ProfilesApi(Resource):
 
     def post(self):
         body = request.get_json()
-        return {"message": "requested to profiles API", "body": body}, HTTPStatus.OK
+        profile = ProfileSchema().load(body)
+        badges = body.get('badges')
+        badges = BadgeSchema(many=True).load(badges)
+        db.session.add(profile)
+        for badge in badges:
+            db.session.add(badge)
+        
+        db.session.commit()
+        return {"message": "requested to profiles API", "profile": profile, "badges": badges}, HTTPStatus.OK
 
 
 class ProfileApi(Resource):
