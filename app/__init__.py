@@ -1,5 +1,8 @@
 from flask import Flask, Blueprint
+import os
+from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
@@ -15,3 +18,12 @@ def register_blueprints(app: Flask):
     api_blueprint.register_blueprint(profile_blueprint, url_prefix="/profiles")
     
     app.register_blueprint(api_blueprint, url_prefix="/api")
+
+def init_db(app: Flask):
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_pre_ping": True}
+
+    
+    db.init_app(app)
