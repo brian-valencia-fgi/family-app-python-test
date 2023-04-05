@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, Blueprint
 
 
 def create_app():
@@ -10,5 +10,8 @@ def register_blueprints(app: Flask):
     from app.routes.main import main_blueprint
     from app.routes.profile import profile_blueprint
 
-    app.register_blueprint(main_blueprint)
-    app.register_blueprint(profile_blueprint, url_prefix="/profiles")
+    api_blueprint = Blueprint("api", __name__)
+    api_blueprint.register_blueprint(main_blueprint)
+    api_blueprint.register_blueprint(profile_blueprint, url_prefix="/profiles")
+    
+    app.register_blueprint(api_blueprint, url_prefix="/api")
