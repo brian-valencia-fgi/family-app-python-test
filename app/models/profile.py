@@ -1,4 +1,4 @@
-from sqlalchemy import Column, DateTime, Integer, String, ForeignKey
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, func
 
 from app import db
 from app.models.role import Role
@@ -19,4 +19,5 @@ class Profile(db.Model):
 
     date_hired = Column(DateTime)
     birthdate = Column(DateTime)
-    date_added = Column(DateTime)
+    date_added = Column(DateTime, server_default=func.now())
+    date_updated = Column(DateTime, server_default=func.now())
