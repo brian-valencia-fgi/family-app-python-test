@@ -1,6 +1,9 @@
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, func
 
+from dataclasses import dataclass
+from datetime import datetime
 from app import db
+from typing import Optional
 from app.models.badge_profile import BadgeProfile
 from app.models.badge import Badge
 
@@ -33,3 +36,15 @@ class ProfileSchema(SQLAlchemyAutoSchema):
     class Meta:
         model=Profile
         unknown=EXCLUDE
+
+class ProfileApiPayloads:
+    @dataclass
+    class PostRequest:
+        role_id: int
+        name: str
+        email: str
+        position: str
+        department: str
+        birthdate: datetime
+        date_hired: Optional[datetime] = None
+        image_name: Optional[str] = None
