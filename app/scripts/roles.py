@@ -9,6 +9,6 @@ def seed_roles_helper():
         Role(role_name="super-admin")
     ]
     for role in roles:
-        db.session.add(role)
+        db.session.merge(role)
 
     db.session.commit()
