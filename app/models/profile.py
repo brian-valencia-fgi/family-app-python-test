@@ -8,7 +8,7 @@ class Profile(db.Model):
     __tablename__ = "profiles"
 
     id = Column(Integer, primary_key=True)
-    role_id = Column(Integer, ForeignKey('roles.id'))
+    role_id = Column(Integer, ForeignKey('roles.id'), server_default='1')
     role = db.relationship(Role, back_populates="users_in_role")
 
     name = Column(String)

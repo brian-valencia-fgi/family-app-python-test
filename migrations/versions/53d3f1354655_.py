@@ -26,7 +26,7 @@ def upgrade():
     )
     op.create_table('profiles',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('role_id', sa.Integer(), nullable=True),
+    sa.Column('role_id', sa.Integer(), nullable=True, server_default=sa.text('1')),
     sa.Column('name', sa.String(), nullable=True),
     sa.Column('email', sa.String(), nullable=True),
     sa.Column('position', sa.String(), nullable=True),
