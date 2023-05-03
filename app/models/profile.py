@@ -2,6 +2,8 @@ from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, func
 
 from app import db
 from app.models.role import Role
+from app.models.badge_profile import BadgeProfile
+from app.models.badge import Badge
 
 
 class Profile(db.Model):
@@ -21,3 +23,5 @@ class Profile(db.Model):
     birthdate = Column(DateTime)
     date_added = Column(DateTime, server_default=func.now())
     date_updated = Column(DateTime, server_default=func.now())
+    
+    badges = db.relationship(Badge, secondary=BadgeProfile.__table__)
