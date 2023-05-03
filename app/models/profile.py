@@ -1,13 +1,15 @@
-from sqlalchemy import Column, DateTime, Integer, String
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, func
 
 from app import db
+from app.models.role import Role
 
 
 class Profile(db.Model):
     __tablename__ = "profiles"
 
     id = Column(Integer, primary_key=True)
-    role_id = Column(Integer)
+    role_id = Column(Integer, ForeignKey('roles.id'))
+    role = db.relationship(Role, back_populates="users_in_role")
 
     name = Column(String)
     email = Column(String)
@@ -17,4 +19,5 @@ class Profile(db.Model):
 
     date_hired = Column(DateTime)
     birthdate = Column(DateTime)
-    date_added = Column(DateTime)
+    date_added = Column(DateTime, server_default=func.now())
+    date_updated = Column(DateTime, server_default=func.now())

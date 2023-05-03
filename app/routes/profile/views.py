@@ -2,6 +2,7 @@ from http import HTTPStatus
 
 from flask import request
 from flask_restful import Resource
+from app.models.profile import Profile
 
 
 class ProfilesApi(Resource):
