@@ -19,6 +19,7 @@ def create_app():
 
 
 def register_blueprints(app: Flask):
+    from app.routes.decorators_test import decorators_test_blueprint
     from app.routes.main import main_blueprint
     from app.routes.profile import profile_blueprint
     from app.scripts.commands import commands_blueprint
@@ -26,6 +27,7 @@ def register_blueprints(app: Flask):
     api_blueprint = Blueprint("api", __name__)
     api_blueprint.register_blueprint(main_blueprint)
     api_blueprint.register_blueprint(profile_blueprint, url_prefix="/profiles")
+    api_blueprint.register_blueprint(decorators_test_blueprint, url_prefix="/decorators_test")
 
     app.register_blueprint(api_blueprint, url_prefix="/api")
     app.register_blueprint(commands_blueprint)
